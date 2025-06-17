@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>761612211519-v32np3ukjqkhnb00vjpp8d3pu1smriic.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.761612211519-v32np3ukjqkhnb00vjpp8d3pu1smriic</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>761612211519-sbsof7grin859sba4tc9p1lcv6fvtc2f.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD6SQvmI8Kn9BfWuZcHS0kdz1PogFFUpTo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>761612211519</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.prophetic.islam.admin</string>
+	<key>PROJECT_ID</key>
+	<string>prophetic-lifestyle</string>
+	<key>STORAGE_BUCKET</key>
+	<string>prophetic-lifestyle.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:761612211519:ios:7af19ec7dd95784f85af8a</string>
+</dict>
+</plist>

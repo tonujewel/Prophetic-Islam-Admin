@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "761612211519",
+    "project_id": "prophetic-lifestyle",
+    "storage_bucket": "prophetic-lifestyle.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761612211519:android:9724bcb51011a96385af8a",
+        "android_client_info": {
+          "package_name": "com.prophetic.islam.admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "761612211519-p17jitst8t7nlk37gatpp8sd3utc6jrs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnEHGMUd6tLun-OMylPztY-fLrwl40zg8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "761612211519-p17jitst8t7nlk37gatpp8sd3utc6jrs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "761612211519-v32np3ukjqkhnb00vjpp8d3pu1smriic.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.prophetic.islam.admin"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:761612211519:android:c4bce4e825408a0685af8a",
+        "android_client_info": {
+          "package_name": "com.propheticlifestyle.daily"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "761612211519-sbsof7grin859sba4tc9p1lcv6fvtc2f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.propheticlifestyle.daily",
+            "certificate_hash": "a37b50f101f3a64e536cd5bb9f4496dbee901d88"
+          }
+        },
+        {
+          "client_id": "761612211519-p17jitst8t7nlk37gatpp8sd3utc6jrs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnEHGMUd6tLun-OMylPztY-fLrwl40zg8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "761612211519-p17jitst8t7nlk37gatpp8sd3utc6jrs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "761612211519-v32np3ukjqkhnb00vjpp8d3pu1smriic.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.prophetic.islam.admin"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
