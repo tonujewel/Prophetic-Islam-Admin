@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:prophetic_islam_admin/core/utils/app_utils.dart';
-import 'package:prophetic_islam_admin/core/widgets/custom_network_image.dart';
+import '../waj/waz_list_by_author_screen.dart';
+import 'add_author_screen.dart';
 
 class AuthorListScreen extends StatelessWidget {
   const AuthorListScreen({super.key});
@@ -9,39 +10,87 @@ class AuthorListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Author List')),
+      appBar: AppBar(title: Text("Author List")),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('authors').orderBy('name').snapshots(),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return const Center(child: Text('No authors found.'));
-          }
+          if (!snapshot.hasData) return Center(child: CircularProgressIndicator());
 
           final authors = snapshot.data!.docs;
 
           return ListView.builder(
+            padding: EdgeInsets.all(16),
             itemCount: authors.length,
             itemBuilder: (context, index) {
               final data = authors[index].data() as Map<String, dynamic>;
               final authorId = authors[index].id;
 
-              return ListTile(
-                leading: CircleAvatar(
-                  child: CustomNetworkImage(imageUrl: AppUtils.getDirectImageUrlFromDrive(data['imageUrl']) ?? ""),
+              return Card(
+                elevation: 2,
+                child: ListTile(
+                  contentPadding: EdgeInsets.all(0),
+                  leading: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CircleAvatar(
+                      backgroundImage: NetworkImage(AppUtils.getDirectImageUrlFromDrive(data['imageUrl']) ?? ""),
+                    ),
+                  ),
+                  title: Text(data['name']),
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => WazListByAuthorScreen(
+                        authorId: authorId,
+                        authorName: data['name'],
+                      ),
+                    ),
+                  ),
+                  trailing: PopupMenuButton<String>(
+                    onSelected: (value) async {
+                      if (value == 'edit') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => AddAuthorScreen(
+                              authorId: authorId,
+                              existingData: data,
+                            ),
+                          ),
+                        );
+                      } else if (value == 'delete') {
+                        final confirm = await showDialog(
+                          context: context,
+                          builder: (_) => AlertDialog(
+                            title: Text('Delete Author?'),
+                            content: Text('Are you sure you want to delete this author?'),
+                            actions: [
+                              TextButton(onPressed: () => Navigator.pop(context, false), child: Text('Cancel')),
+                              TextButton(onPressed: () => Navigator.pop(context, true), child: Text('Delete')),
+                            ],
+                          ),
+                        );
+                        if (confirm == true) {
+                          await FirebaseFirestore.instance.collection('authors').doc(authorId).delete();
+                        }
+                      }
+                    },
+                    itemBuilder: (context) => [
+                      PopupMenuItem(value: 'edit', child: Text('Edit')),
+                      PopupMenuItem(value: 'delete', child: Text('Delete')),
+                    ],
+                  ),
                 ),
-                title: Text(data['name']),
-                subtitle: Text(data['speciality']),
-                onTap: () {
-                  // You can navigate to an author detail screen here
-                },
               );
             },
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => AddAuthorScreen()),
+        ),
       ),
     );
   }

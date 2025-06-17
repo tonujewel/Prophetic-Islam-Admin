@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddAuthorScreen extends StatefulWidget {
-  const AddAuthorScreen({super.key});
+  final String? authorId;
+  final Map<String, dynamic>? existingData;
+
+  const AddAuthorScreen({super.key, this.authorId, this.existingData});
 
   @override
   _AddAuthorScreenState createState() => _AddAuthorScreenState();
@@ -14,30 +17,34 @@ class _AddAuthorScreenState extends State<AddAuthorScreen> {
   final _specialityController = TextEditingController();
   final _imageUrlController = TextEditingController();
 
-  Future<void> _submitAuthor() async {
-    final name = _nameController.text.trim();
-    final bio = _bioController.text.trim();
-    final speciality = _specialityController.text.trim();
-    final imageUrl = _imageUrlController.text.trim();
+  @override
+  void initState() {
+    super.initState();
+    if (widget.existingData != null) {
+      _nameController.text = widget.existingData!['name'];
+      _bioController.text = widget.existingData!['bio'];
+      _specialityController.text = widget.existingData!['speciality'];
+      _imageUrlController.text = widget.existingData!['imageUrl'];
+    }
+  }
 
-    if ([name, bio, speciality, imageUrl].any((v) => v.isEmpty)) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('All fields are required.')));
-      return;
+  Future<void> _submitAuthor() async {
+    final data = {
+      'name': _nameController.text.trim(),
+      'bio': _bioController.text.trim(),
+      'speciality': _specialityController.text.trim(),
+      'imageUrl': _imageUrlController.text.trim(),
+    };
+
+    if (widget.authorId != null) {
+      // Edit
+      await FirebaseFirestore.instance.collection('authors').doc(widget.authorId).update(data);
+    } else {
+      // Add
+      await FirebaseFirestore.instance.collection('authors').add(data);
     }
 
-    await FirebaseFirestore.instance.collection('authors').add({
-      'name': name,
-      'bio': bio,
-      'speciality': speciality,
-      'imageUrl': imageUrl,
-      'createdAt': Timestamp.now(),
-    });
-
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Author Added')));
-    _nameController.clear();
-    _bioController.clear();
-    _specialityController.clear();
-    _imageUrlController.clear();
+    Navigator.pop(context);
   }
 
   @override
